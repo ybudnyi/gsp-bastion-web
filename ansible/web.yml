@@ -1,0 +1,7 @@
+---
+- name: WEB role install
+  hosts: webserver
+  become: true
+  gather_facts: True
+  roles:
+    - web

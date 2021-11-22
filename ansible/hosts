@@ -1,0 +1,21 @@
+[bastion]
+bastion ansible_host=104.197.213.161
+
+[database]
+db ansible_host=10.0.2.2
+[database:vars]
+ansible_ssh_common_args='-J 104.197.213.161'
+
+[webserver]
+web1 ansible_host=10.0.2.5
+web2 ansible_host=10.0.2.3
+[webserver:vars]
+ansible_ssh_common_args='-J 104.197.213.161'
+
+# [workers:children]
+# database
+# webserver
+# [workers:vars]
+# ansible_ssh_common_args='-J 104.197.213.161'
+#ansible_ssh_common_args: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -J 35.226.224.236'
+#ansible_ssh_common_args: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ProxyCommand="ssh -A -i /home/yurii/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -W %h:%p -q 35.226.224.236"'

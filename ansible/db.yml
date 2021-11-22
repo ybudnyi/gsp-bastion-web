@@ -1,0 +1,7 @@
+---
+- name: DB role install
+  hosts: database
+  become: true
+  gather_facts: True
+  roles:
+    - db

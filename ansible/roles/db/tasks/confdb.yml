@@ -1,0 +1,38 @@
+---
+- name: "Create web database"
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    state: present
+    name: "{{ db_name }}"
+
+
+- name: "Create db user"
+  community.postgresql.postgresql_user:
+    state: present
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+  become: yes
+  become_user: postgres
+
+- name: "Grant db user access to web db"
+  community.postgresql.postgresql_privs:
+    type: database
+    database: "{{ db_name }}"
+    roles: "{{ db_user }}"
+    grant_option: no
+    privs: all
+  become: yes
+  become_user: postgres
+
+- name: "Allow md5 connection for the db user"
+  community.postgresql.postgresql_pg_hba:
+    dest: "~/data/pg_hba.conf"
+    contype: host
+    databases: all
+    method: trusty
+    users: "{{ db_user }}"
+    create: true
+  become: yes
+  become_user: postgres
+  notify: restart postgres

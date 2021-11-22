@@ -1,0 +1,12 @@
+# ---
+# - name: Enable UFW
+#   community.general.ufw:
+#     state: enabled
+# - name: Open ports for DB connection
+#   community.general.ufw:
+#     rule: allow
+#     port: "{{ item }}"
+#   loop:
+#     - 5432
+
+

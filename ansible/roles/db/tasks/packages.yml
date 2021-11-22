@@ -1,0 +1,15 @@
+---
+- name: Install packages for postgresql cluster
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  loop:
+    - postgresql
+    - postgresql-contrib
+    - libpq-dev
+    - python-dev
+    - python3-pip
+- name: Instal tools for db configuration
+  pip:
+    name: psycopg2

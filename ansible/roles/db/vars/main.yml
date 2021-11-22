@@ -1,0 +1,5 @@
+---
+# vars file for db
+db_name: testdb
+db_user: testuser
+db_password: test

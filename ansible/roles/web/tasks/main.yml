@@ -1,0 +1,15 @@
+---
+- name: Log into DockerHub
+  community.docker.docker_login:
+    username: docker
+    password: rekcod
+- name: Pull an image
+  community.docker.docker_image:
+    name: "{{ img  }}"
+    source: pull
+- name: Create a data container
+  community.docker.docker_container:
+    name: mydata
+    image: "{{ img }}"
+    ports:
+    - 80:80
